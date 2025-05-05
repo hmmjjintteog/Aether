@@ -1,0 +1,124 @@
+/* 전역 리셋 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #121212 0%, #2a2a2a 100%);
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* 캔버스 컨테이너 */
+#phoneCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* 휴대폰 화면을 위한 오버레이 */
+#screen-overlay {
+  font-weight: 300;
+  background: #000;
+  color: #0af;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  box-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
+  pointer-events: none; /* 오버레이가 3D 휴대폰과의 상호작용을 방해하지 않도록 함 */
+}
+
+#screen-overlay.active {
+  opacity: 1;
+}
+
+/* 부팅 애니메이션을 위한 진행 표시줄 */
+.progress {
+  width: 80%;
+  height: 4px;
+  background: #001830;
+  border-radius: 2px;
+  margin-top: 20px;
+}
+
+.bar {
+  height: 100%;
+  background: #0af;
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+/* 홈 화면 스타일링 */
+.home-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+.time {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.date {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 50px;
+  text-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  padding: 0 15px;
+}
+
+.app {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: auto;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+}
+
+.app:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 볼륨 표시기 */
+.volume-indicator {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  animation: fadeOut 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeOut {
+  from { opacity: 0.9; }
+  to { opacity: 0; }
+}
