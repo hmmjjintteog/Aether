@@ -9,6 +9,11 @@ html, body {
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
+/* 초기 줌 레벨을 위한 CSS 변수 */
+:root {
+  --initial-zoom: 1.7; /* Firefox 기준 170% */
+}
+
 /* 캔버스 컨테이너 */
 #phoneCanvas {
   position: absolute;
@@ -21,16 +26,21 @@ html, body {
 
 /* 휴대폰 화면을 위한 오버레이 */
 #screen-overlay {
+  position: absolute;
   font-weight: 300;
   background: #000;
   color: #0af;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   opacity: 0;
   transform-style: preserve-3d;
   perspective: 1000px;
   box-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
   pointer-events: none; /* 오버레이가 3D 휴대폰과의 상호작용을 방해하지 않도록 함 */
+  box-sizing: border-box;
+  will-change: transform, opacity; /* 성능 최적화 */
+  /* 줌 레벨 고려한 초기 크기 설정 */
+  transform-origin: center center;
 }
 
 #screen-overlay.active {
@@ -64,43 +74,51 @@ html, body {
 }
 
 .time {
-  font-size: 3rem;
+  font-size: 2.5rem; /* 반응형 크기로 조정 */
   font-weight: 200;
   margin-bottom: 5px;
   text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
 }
 
 .date {
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* 반응형 크기로 조정 */
   opacity: 0.7;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   text-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
 }
 
 .app-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 15px;
-  padding: 0 15px;
+  grid-gap: 10px;
+  padding: 0 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .app {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  padding-bottom: 100%; /* 정사각형 유지 */
+  position: relative;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
   margin: auto;
   backdrop-filter: blur(5px);
   transition: all 0.2s ease;
 }
 
-.app:hover {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.2);
+.app::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
 /* 볼륨 표시기 */
@@ -121,4 +139,40 @@ html, body {
 @keyframes fadeOut {
   from { opacity: 0.9; }
   to { opacity: 0; }
+}
+
+/* 미디어 쿼리 - 고해상도 디스플레이에 맞게 조정 */
+@media screen and (min-resolution: 2dppx) {
+  .time {
+    font-size: 2rem;
+  }
+  
+  .date {
+    font-size: 0.7rem;
+  }
+  
+  .app-grid {
+    grid-gap: 8px;
+  }
+}
+
+/* 화면 회전 감지 */
+@media (orientation: portrait) {
+  .app-grid {
+    margin-top: 10px;
+  }
+}
+
+@media (orientation: landscape) {
+  .home-screen {
+    padding: 20px 0;
+  }
+  
+  .time {
+    margin-bottom: 2px;
+  }
+  
+  .date {
+    margin-bottom: 15px;
+  }
 }

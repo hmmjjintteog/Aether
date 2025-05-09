@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Firefox 기준 초기 줌 레벨 170%로 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.7, user-scalable=yes" />
+  <title>Ather</title>
+  <!-- 스타일시트 로드 -->
+  <link rel="stylesheet" href="../Css/index.css" />
+  <!-- Three.js를 모듈로 사용하기 위한 설정 -->
+</head>
+<body>
+  <!-- 3D 휴대폰 렌더링을 위한 캔버스 컨테이너 -->
+  <div id="phoneCanvas"></div>
+  <!-- 휴대폰 화면 컨텐츠를 위한 오버레이 -->
+  <div id="screen-overlay"></div>
+  <!-- 숨겨진 요소 (미사용) -->
+  <div style="display: none;">
+  </div>
+
+  <!-- Three.js를 모듈로 임포트 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+      }
+    }
+  </script>
+  <!-- 메인 자바스크립트 로드 -->
+  <script type="module" src="../main.js"></script>
+</body>
+</html>
