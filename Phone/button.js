@@ -1,5 +1,5 @@
 // button.js - 버튼 상호작용 관련 기능
-import { config, utils } from './index.js';
+import { config, utils } from '../main.js';
 import { togglePower, showVolumeIndicator } from './screen.js';
 
 // 상호작용 설정

@@ -1,22 +1,6 @@
-import { config, utils } from './index.js';
-import { createRoundedRectangle } from './main.js';
+import { config, utils } from '../main.js';
+import { createRoundedRectangle } from './graphics.js';
 import * as THREE from 'three';
-
-// 휴대폰과 모든 구성 요소 생성
-export function createPhone() {
-  // 휴대폰 그룹 생성
-  config.phoneObject = new THREE.Group();
-  utils.scene.add(config.phoneObject);
-
-  // 휴대폰 본체 생성
-  createPhoneBody();
-  
-  // 휴대폰 화면 생성
-  createPhoneScreen();
-  
-  // 휴대폰 버튼 생성
-  createPhoneButtons();
-}
 
 // 휴대폰 본체 생성
 function createPhoneBody() {
@@ -106,3 +90,21 @@ function createVolumeButtons(material) {
   config.volDownMesh.userData.type = 'volDown';
   config.phoneObject.add(config.volDownMesh);
 }
+
+
+// 휴대폰과 모든 구성 요소 생성
+export function createPhone() {
+  // 휴대폰 그룹 생성
+  config.phoneObject = new THREE.Group();
+  utils.scene.add(config.phoneObject);
+
+  // 휴대폰 본체 생성
+  createPhoneBody();
+  
+  // 휴대폰 화면 생성
+  createPhoneScreen();
+  
+  // 휴대폰 버튼 생성
+  createPhoneButtons();
+}
+

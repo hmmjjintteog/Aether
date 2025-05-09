@@ -1,5 +1,5 @@
 // screen.js - 화면 인터페이스 및 UI 관련 기능
-import { config, utils } from './index.js';
+import { config, utils } from '../main.js';
 import * as THREE from 'three';
 
 // 휴대폰 전원 켜기
